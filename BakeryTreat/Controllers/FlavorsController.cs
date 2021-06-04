@@ -63,7 +63,7 @@ namespace BakeryTreat.Controllers
       {
         return RedirectToAction("Details", new { id = id });
       }
-      ViewBag.FlavorId = new SelectList(_db.Treats, "TreatId", "Name");
+      ViewBag.FlavorId = new SelectList(_db.Treats, "TreatId", "TreatName");
       return View(thisFlavor);
     }
 
