@@ -1,11 +1,9 @@
-
+<div class="offset-md-3 col-md-6">
 @{
   Layout = "_Layout";
 }
 
 @model BakeryTreat.Models.Treat
-
-<h2>Edit</h2>
 
 <h4>Edit this treat: @Html.DisplayFor(m => m.TreatName)</h4>
 
@@ -13,13 +11,7 @@
 {
   @Html.HiddenFor(m => m.TreatId)
 
-  @Html.LabelFor(m => m.TreatName)
-  @Html.EditorFor(m => m.TreatName, new { @class = "form-control", placeholder =
-    @Html.DisplayNameFor(m=>m.TreatName), required="required"})
-
-  @Html.Label("Select flavor")
-  @Html.DropDownList("FlavorId")
-
+  @Html.TextBoxFor(m => m.TreatName, new { @class = "form-control", placeholder = @Html.DisplayNameFor(m=>m.TreatName), required="required"})
   <input type="submit" value="Save" class="btn btn-primary"/>
 }
 

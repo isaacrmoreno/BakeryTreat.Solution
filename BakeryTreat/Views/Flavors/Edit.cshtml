@@ -5,15 +5,12 @@
 
 @model BakeryTreat.Models.Flavor
 
-<h2>Edit</h2>
-
 <h4>Edit this flavor: @Html.DisplayFor(m => m.FlavorName)</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(m => m.FlavorId)
 
-  // form control doesnt work on this when you have the following set to @Html.EditorFor but ut might break other stuff?
   @Html.TextBoxFor(m => m.FlavorName, new { @class = "form-control", placeholder = @Html.DisplayNameFor(m=>m.FlavorName), required="required"})
   <input type="submit" value="Save" class="btn btn-primary btn-block" />
 }
