@@ -3,14 +3,16 @@ using System;
 using BakeryTreat.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BakeryTreat.Migrations
 {
     [DbContext(typeof(BakeryTreatContext))]
-    partial class BakeryTreatContextModelSnapshot : ModelSnapshot
+    [Migration("20210604232623_ApplicationUserColumnToDatabase")]
+    partial class ApplicationUserColumnToDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
