@@ -5,7 +5,7 @@
 
 ### By Isaac Moreno 👨‍💻
 
-Click [here](https://github.com/isaacrmoreno/Factory.Solution) to view project.
+Click [here](https://github.com/isaacrmoreno/BakeryTreat.Solution) to view project.
 
 # Description 📝
 
@@ -24,9 +24,9 @@ This is a MVC many-to-many/authentication with identity mock up site for Pierre'
 ### Application Setup:
 
 1. Clone this repository: `% git clone https://github.com/isaacrmoreno/BakeryTreat.Solution`
-2. Navigate to the Factory.Solution directory on your computer
+2. Navigate to the BakeryTreat.Solution directory on your computer
 3. Open with your preferred text editor to view code
-4. Within your Command line run `cd Factory`, touch `appsettings.json`.
+4. Within your Command line run `cd BakeryTreat`, touch `appsettings.json`.
 5. Add the following block of code to your .json file
 
 ```
@@ -42,8 +42,8 @@ This is a MVC many-to-many/authentication with identity mock up site for Pierre'
 ### To Run Application:
 
 1. To run console app:
-   - Navigate to the `Factory.Solution/Factory` directory and run the following commands:
-     - `dotnet restore` to restore the dependencies that are listed in `Factory.csproj`
+   - Navigate to the `BakeryTreat.Solution/BakeryTreat` directory and run the following commands:
+     - `dotnet restore` to restore the dependencies that are listed in `BakeryTreat.csproj`
      - `dotnet add package Microsoft.EntityFrameworkCore -v 5.0.0`
      - `dotnet add package Pomelo.EntityFrameworkCore.MySql -v 5.0.0-alpha.2`
      - `dotnet add package Microsoft.EntityFrameworkCore.Proxies -v 5.0.0`
