@@ -2,11 +2,11 @@
   Layout = "_Layout";
 }
 
-@model BakeryTreat.Models.Flavors
+@model BakeryTreat.Models.Flavor
 
 <h2>Types of Flavors</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h3>@Html.DisplayNameFor(model => model.FlavorName): @Html.DisplayFor(model => model.FlavorName)</h3>
 
 @if(@Model.JoinEntities.Count == 0)
 {
@@ -18,7 +18,7 @@ else
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@join.Item.Description</li>
+    <li>@join.Treat.TreatName</li>
   }
   </ul>
 }

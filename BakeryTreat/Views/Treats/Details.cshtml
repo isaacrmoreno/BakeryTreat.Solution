@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-@model ToDoList.Models.Treat
+@model BakeryTreat.Models.Treat
 
 <h2>Treats:</h2>
 <hr />
@@ -18,7 +18,7 @@ else
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@join.Flavor.Name</li>
+    <li>@join.Flavor.FlavorName</li>
     @using (Html.BeginForm("DeleteFlavor", "Treats"))
     {
       @Html.Hidden("joinId", @join.FlavorTreatId)
