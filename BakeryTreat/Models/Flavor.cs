@@ -13,6 +13,7 @@ namespace BakeryTreat.Models
     [Required]
     [Display(Name = "Flavor")]
     public string FlavorName { get; set; }
+    public virtual ApplicationUser User { get; set; }
     public virtual ICollection<FlavorTreat> JoinEntities { get; set; }
   }
 }
