@@ -1,3 +1,4 @@
+<div class="offset-md-3 col-md-6">
 @{
   Layout = "_Layout";
 }
@@ -8,12 +9,9 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.TreatName)
-  @Html.TextBoxFor(model => model.TreatName)
+  @Html.TextBoxFor(m => m.TreatName, new { @class = "form-control", placeholder =
+  @Html.DisplayNameFor(m=>m.TreatName), required="required"})
 
-  @Html.Label("Select flavor")
-  @Html.DropDownList("FlavorId")
-
-  <input type="submit" value="Add new treat" class="btn btn-default" />
+  <input type="submit" value="Add new treat" class="btn btn-primary btn-block" />
 }
 <p>@Html.ActionLink("Show all treats", "Index")</p>

@@ -1,17 +1,22 @@
+<div class="offset-md-3 col-md-6">
 @{
   Layout = "_Layout";
 }
 
 @using System.Security.Claims
 
-<h2>Authentication with Identity</h2>
-<hr />
 @if (User.Identity.IsAuthenticated)
 {
-    <p>Hello @User.Identity.Name!</p>
+    <p>Welcome @User.Identity.Name!</p>
+
+    <p>@Html.ActionLink("Add Flavor", "Create", "Treats")</p>
+    <p>@Html.ActionLink("Add Treat", "Create", "Flavors")</p>
+
+    <hr>
+
     @using (Html.BeginForm("LogOff", "Account"))
     {
-        <input type="submit" class="btn btn-primary" value="Log out" />
+        <input type="submit" class="btn btn-primary btn-block" value="Log out" />
     }
 }
 else

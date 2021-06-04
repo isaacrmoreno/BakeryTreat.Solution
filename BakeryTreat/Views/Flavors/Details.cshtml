@@ -6,7 +6,7 @@
 
 <h2>Types of Flavors</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.FlavorName): @Html.DisplayFor(model => model.FlavorName)</h3>
+<h3>@Html.DisplayNameFor(m => m.FlavorName): @Html.DisplayFor(m => m.FlavorName)</h3>
 
 @if(@Model.JoinEntities.Count == 0)
 {
@@ -23,6 +23,8 @@ else
   </ul>
 }
 
+@* No add treat method added yet *@
+<p>@Html.ActionLink("Add a Treat", "AddTreat", new { id = Model.FlavorId })</p>
 <p>@Html.ActionLink("Back to flavors", "Index")</p>
 <p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
 <p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId })</p>

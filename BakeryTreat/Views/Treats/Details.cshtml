@@ -6,7 +6,7 @@
 
 <h2>Treats:</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.TreatName): @Html.DisplayFor(model => model.TreatName)</h3>
+<h3>@Html.DisplayNameFor(m => m.TreatName): @Html.DisplayFor(m => m.TreatName)</h3>
 
 @if(@Model.JoinEntities.Count == 0)
 {
@@ -22,7 +22,7 @@ else
     @using (Html.BeginForm("DeleteFlavor", "Treats"))
     {
       @Html.Hidden("joinId", @join.FlavorTreatId)
-      <input type="submit" value="Delete"/>
+      <input type="submit" value="Delete" class="btn btn-primary"/>
     }
   }
   </ul>

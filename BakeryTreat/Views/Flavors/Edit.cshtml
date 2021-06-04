@@ -1,4 +1,4 @@
-
+<div class="offset-md-3 col-md-6">
 @{
   Layout = "_Layout";
 }
@@ -7,15 +7,14 @@
 
 <h2>Edit</h2>
 
-<h4>Edit this flavor: @Html.DisplayFor(model => model.FlavorName)</h4>
+<h4>Edit this flavor: @Html.DisplayFor(m => m.FlavorName)</h4>
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.FlavorId)
+  @Html.HiddenFor(m => m.FlavorId)
 
-  @Html.LabelFor(model => model.FlavorName)
-  @Html.EditorFor(model => model.FlavorName)
-
-  <input type="submit" value="Save" />
+  // form control doesnt work on this when you have the following set to @Html.EditorFor but ut might break other stuff?
+  @Html.TextBoxFor(m => m.FlavorName, new { @class = "form-control", placeholder = @Html.DisplayNameFor(m=>m.FlavorName), required="required"})
+  <input type="submit" value="Save" class="btn btn-primary btn-block" />
 }
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Back to list", "Index")</p

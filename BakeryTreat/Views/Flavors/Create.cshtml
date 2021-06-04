@@ -1,14 +1,15 @@
+<div class="offset-md-3 col-md-6">
+
 @{
   Layout = "_Layout";
 }
 
 @model BakeryTreat.Models.Flavor
 
-<h4>Add new flavor </h4>
+<h4>Add New flavor </h4>
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.FlavorName)
-  @Html.TextBoxFor(model => model.FlavorName)
-  <input type="submit" value="Add new flavor" />
+  @Html.TextBoxFor(m => m.FlavorName, new { @class = "form-control", placeholder = @Html.DisplayNameFor(m=>m.FlavorName), required="required"})
+  <input type="submit" value="Add new flavor" class="btn btn-primary btn-block"/>
 }
 <p>@Html.ActionLink("Show all flavors", "Index")</p>
