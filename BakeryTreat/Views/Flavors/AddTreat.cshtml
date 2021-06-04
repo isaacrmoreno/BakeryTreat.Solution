@@ -1,0 +1,21 @@
+<div class="offset-md-3 col-md-6">
+
+@{
+  Layout = "_Layout";
+}
+
+@model BakeryTreat.Models.Flavor
+
+<h4>Add @Html.DisplayFor(m => m.FlavorName) to treat!</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(m => m.FlavorId)
+
+  @Html.Label("Select treat")
+  @Html.DropDownList("TreatId")
+
+  <input type="submit" value="Save" class="btn btn-primary"/>
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
