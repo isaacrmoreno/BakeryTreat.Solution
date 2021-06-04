@@ -26,6 +26,10 @@ header {
   font-size: 1.5em;
 }
 
+form input {
+  margin: 15px 0px;
+}
+
 footer {
   background: #333;
   bottom: 0px;
