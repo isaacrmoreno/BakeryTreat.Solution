@@ -69,7 +69,7 @@ namespace BakeryTreat.Controllers
       var currentUser = await _userManager.FindByIdAsync(userId);
       var thisTreat = _db.Treats
           .Where(entry => entry.User.Id == currentUser.Id)
-          .FirstOrDefault(item => item.TreatId == id);
+          .FirstOrDefault(treat => treat.TreatId == id);
       if (thisTreat == null)
       {
         return RedirectToAction("Details", new { id = id });
