@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Security.Claims;
@@ -10,7 +11,6 @@ using System.Linq;
 
 namespace BakeryTreat.Controllers
 {
-  [Authorize]
   public class TreatsController : Controller
   {
     private readonly BakeryTreatContext _db;
@@ -22,14 +22,12 @@ namespace BakeryTreat.Controllers
       _db = db;
     }
 
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-      var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      List<Treat> userTreats = _db.Treats.ToList();
       return View(userTreats);
     }
-
+    [Authorize]
     public ActionResult Create()
     {
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
@@ -57,13 +55,25 @@ namespace BakeryTreat.Controllers
       var thisTreat = _db.Treats
           .Include(treat => treat.JoinEntities)
           .ThenInclude(join => join.Flavor)
+          .Include(treat => treat.User)
           .FirstOrDefault(treat => treat.TreatId == id);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ViewBag.IsCurrentUser = userId != null ? userId == thisTreat.User.Id : false;
       return View(thisTreat);
     }
+    [Authorize]
 
-    public ActionResult Edit(int id)
+    public async Task<ActionResult> Edit(int id)
     {
-      var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var thisTreat = _db.Treats
+          .Where(entry => entry.User.Id == currentUser.Id)
+          .FirstOrDefault(item => item.TreatId == id);
+      if (thisTreat == null)
+      {
+        return RedirectToAction("Details", new { id = id });
+      }
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View(thisTreat);
     }
@@ -79,10 +89,19 @@ namespace BakeryTreat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    [Authorize]
 
-    public ActionResult AddFlavor(int id)
+    public async Task<ActionResult> AddFlavor(int id)
     {
-      var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var thisTreat = _db.Treats
+          .Where(entry => entry.User.Id == currentUser.Id)
+          .FirstOrDefault(item => item.TreatId == id);
+      if (thisTreat == null)
+      {
+        return RedirectToAction("Details", new { id = id });
+      }
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View(thisTreat);
     }
@@ -97,10 +116,19 @@ namespace BakeryTreat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    [Authorize]
 
-    public ActionResult Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-      var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var thisTreat = _db.Treats
+          .Where(entry => entry.User.Id == currentUser.Id)
+          .FirstOrDefault(item => item.TreatId == id);
+      if (thisTreat == null)
+      {
+        return RedirectToAction("Details", new { id = id });
+      }
       return View(thisTreat);
     }
 
