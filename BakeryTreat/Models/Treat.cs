@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BakeryTreat.Models
 {
@@ -15,6 +16,6 @@ namespace BakeryTreat.Models
     public string TreatName { get; set; }
     public virtual ApplicationUser User { get; set; }
 
-    public virtual ICollection<CategoryTreat> JoinEntities { get; }
+    public virtual ICollection<FlavorTreat> JoinEntities { get; }
   }
 }
