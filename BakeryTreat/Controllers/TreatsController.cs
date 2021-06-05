@@ -49,7 +49,6 @@ namespace BakeryTreat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
     public ActionResult Details(int id)
     {
       var thisTreat = _db.Treats
@@ -62,7 +61,6 @@ namespace BakeryTreat.Controllers
       return View(thisTreat);
     }
     [Authorize]
-
     public async Task<ActionResult> Edit(int id)
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -90,7 +88,6 @@ namespace BakeryTreat.Controllers
       return RedirectToAction("Index");
     }
     [Authorize]
-
     public async Task<ActionResult> AddFlavor(int id)
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -116,8 +113,8 @@ namespace BakeryTreat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    [Authorize]
 
+    [Authorize]
     public async Task<ActionResult> Delete(int id)
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

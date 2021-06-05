@@ -14,6 +14,6 @@ namespace BakeryTreat.Models
     [Display(Name = "Flavor")]
     public string FlavorName { get; set; }
     public virtual ApplicationUser User { get; set; }
-    public virtual ICollection<FlavorTreat> JoinEntities { get; set; }
+    public virtual ICollection<FlavorTreat> JoinEntities { get; }
   }
 }

@@ -9,9 +9,7 @@ namespace BakeryTreat.Models
     {
       this.JoinEntities = new HashSet<FlavorTreat>();
     }
-
     public int TreatId { get; set; }
-
     [Required]
     [Display(Name = "Treat")]
     public string TreatName { get; set; }

@@ -24,19 +24,28 @@ namespace BakeryTreat.Controllers
 
     public ActionResult Index()
     {
-      List<Flavor> userFlavor = _db.Flavors.ToList(); // and so did this variable
-      return View(userFlavor); // This used to be model
+      List<Flavor> userFlavor = _db.Flavors.ToList();
+      return View(userFlavor);
     }
     [Authorize]
     public ActionResult Create()
     {
+      ViewBag.FlavorId = new SelectList(_db.Treats, "TreatId", "TreatName");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Flavor flavor)
+    public async Task<ActionResult> Create(Flavor flavor, int TreatId)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      flavor.User = currentUser;
       _db.Flavors.Add(flavor);
+      _db.SaveChanges();
+      if (TreatId != 0)
+      {
+        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -45,10 +54,10 @@ namespace BakeryTreat.Controllers
       var thisFlavor = _db.Flavors
           .Include(flavor => flavor.JoinEntities)
           .ThenInclude(join => join.Treat)
-          .Include(flavor => flavor.User)
+          .Include(flavor => flavor.User) // new line
           .FirstOrDefault(flavor => flavor.FlavorId == id);
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      ViewBag.IsCurrentUser = userId != null ? userId == thisFlavor.User.Id : false;
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // new line
+      // ViewBag.IsCurrentUser = userId != null ? userId == thisFlavor.User.Id : false; // new line
       return View(thisFlavor);
     }
     [Authorize]
@@ -78,7 +87,6 @@ namespace BakeryTreat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    /////
     [Authorize]
     public async Task<ActionResult> AddTreat(int id)
     {
@@ -105,7 +113,7 @@ namespace BakeryTreat.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    /////
+
     [Authorize]
     public async Task<ActionResult> Delete(int id)
     {
@@ -126,6 +134,15 @@ namespace BakeryTreat.Controllers
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
       _db.Flavors.Remove(thisFlavor);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DeleteTreat(int joinId)
+    {
+      var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+      _db.FlavorTreat.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
